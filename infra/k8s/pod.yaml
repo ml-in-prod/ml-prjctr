@@ -5,4 +5,4 @@ metadata:
 spec:
   containers:
     - name: server
-      image: ghcr.io/securims/ml-prjctr
+      image: ghcr.io/ml-in-prod/ml-prjctr
