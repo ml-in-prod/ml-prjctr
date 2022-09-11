@@ -1,6 +1,10 @@
 name: Create K8s Cluster
 
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   create-cluster:
