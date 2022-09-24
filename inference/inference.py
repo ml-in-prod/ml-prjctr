@@ -97,7 +97,7 @@ def main():
     # print(f"Inference one worker {time.monotonic() - s}")
 
     s = time.monotonic()
-    max_workers = 16
+    max_workers = 8
     _ = run_inference_process_pool(x_test=x_test, max_workers=max_workers)
     print(f"Inference {max_workers} workers {time.monotonic() - s}")
 
