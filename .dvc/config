@@ -1,0 +1,10 @@
+[core]
+    remote = minio
+    autostage = true
+['remote "storage"']
+    url = http://127.0.0.1:9000
+['remote "minio"']
+    url = s3://data
+    endpointurl = http://localhost:9000
+    access_key_id = minio
+    secret_access_key = minio123
