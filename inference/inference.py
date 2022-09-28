@@ -24,7 +24,7 @@ def train_model(x_train: np.ndarray, y_train: np.ndarray) -> ak.TextRegressor:
 
     try:
         model.save("model_autokeras", save_format="tf")
-    except Exception:
+    except:
         model.save("model_autokeras.h5")
 
     return reg
