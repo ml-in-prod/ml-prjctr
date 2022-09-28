@@ -13,11 +13,24 @@ from tensorflow.keras.models import load_model
 
 import autokeras as ak
 
+import wandb
+from wandb.keras import WandbCallback
+
+wandb.init(project="ml-in-prod")
+
+wandb.config = {
+    "learning_rate": 0.001,
+    "epochs": 5,
+    "batch_size": 128
+}
+
 
 def train_model(x_train: np.ndarray, y_train: np.ndarray) -> ak.TextRegressor:
     reg = ak.TextRegressor(overwrite=True, max_trials=1)
     # Feed the text regressor with training data.
-    reg.fit(x_train, y_train, epochs=2)
+
+    reg.fit(x_train, y_train, epochs=5, callbacks=[WandbCallback()])
+
     # Predict with the best model.
 
     model = reg.export_model()
