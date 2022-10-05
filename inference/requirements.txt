@@ -1,7 +1,7 @@
 numpy
 pandas
 sklearn
-tensorflow
+tensorflow==2.9.0
 autokeras
 pytest
 great_expectations
