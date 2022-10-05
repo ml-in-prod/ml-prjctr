@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../../inference')
+sys.path.append('../inference')
 
 from pathlib import Path
 import pytest
@@ -12,7 +12,7 @@ import numpy
 
 @pytest.fixture()
 def test_file_path() -> str:
-    return "../test.csv"
+    return "./test.csv"
 
 @pytest.fixture()
 def test_text() -> str:
@@ -24,7 +24,7 @@ def test_train_and_save_model(test_file_path: str):
 
     train_model(x_train, y_train)
     
-    path = str(Path(__file__).parent.resolve())
+    path = str(Path().parent.resolve())
     
     model_path = Path(path + '/model_autokeras')
     regressor_path = Path(path + '/text_regressor')

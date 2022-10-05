@@ -2,7 +2,7 @@ import great_expectations as ge
 import pandas as pd
 from urllib.request import urlopen
 
-dataset = pd.read_csv("../test.csv")
+dataset = pd.read_csv("./test.csv")
 print (f"{len(dataset)} rows")
 dataset.head(5)
 
