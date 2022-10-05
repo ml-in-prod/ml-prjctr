@@ -49,8 +49,8 @@ def predict(model: ak.TextRegressor, x: np.ndarray) -> np.ndarray:
     return model.predict(x)
 
 
-def run_inference(x_test: np.ndarray, batch_size: int = 64) -> np.ndarray:
-    model = load_model("model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
+def run_inference(x_test: np.ndarray, path:str = "model_autokeras", batch_size: int = 64) -> np.ndarray:
+    model = load_model(path, custom_objects=ak.CUSTOM_OBJECTS)
 
     y_pred = []
     for k in range(0, 100):
@@ -61,7 +61,7 @@ def run_inference(x_test: np.ndarray, batch_size: int = 64) -> np.ndarray:
     return np.concatenate(y_pred)
 
 
-def run_inference_process_pool(x_test: np.ndarray, max_workers: int = 16) -> np.ndarray:
+def run_inference_process_pool(x_test: np.ndarray,  path:str = "model_autokeras", max_workers: int = 16) -> np.ndarray:
     with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as executor:
         chunk_size = len(x_test) // max_workers
 
@@ -73,7 +73,7 @@ def run_inference_process_pool(x_test: np.ndarray, max_workers: int = 16) -> np.
         futures = []
         # submit chunks for inference
         for chunk in chunks:
-            future = executor.submit(run_inference, x_test=chunk)
+            future = executor.submit(run_inference, x_test=chunk, path=path)
             futures.append(future)
 
         # # wait for all futures
