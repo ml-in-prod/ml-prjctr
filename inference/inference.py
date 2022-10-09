@@ -16,7 +16,6 @@ import autokeras as ak
 import wandb
 from wandb.keras import WandbCallback
 
-
 def train_model(x_train: np.ndarray, y_train: np.ndarray) -> ak.TextRegressor:
 
     wandb.init(project="ml-in-prod")

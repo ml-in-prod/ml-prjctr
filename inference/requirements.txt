@@ -5,3 +5,5 @@ tensorflow
 autokeras
 pytest
 great_expectations
+typer
+wandb
