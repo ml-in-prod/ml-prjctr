@@ -3,12 +3,20 @@ import typer
 from inference import get_data, train_model, run_inference_process_pool
 import time
 
+import numpy as np
+
 app = typer.Typer()
 
 @app.command()
 def data(path: str):
     x_train, y_train, x_test = get_data(path)
-    train_model(x_train, y_train)
+
+    return np.array(x_train), np.array(y_train), np.array(x_test)
+
+@app.command()
+def train(path: str):
+    x_train, y_train, x_test = get_data(path)
+    return train_model(x_train, y_train)
 
 
 @app.command()
