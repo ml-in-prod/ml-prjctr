@@ -1,0 +1,25 @@
+{
+    "os": "macOS-10.16-x86_64-i386-64bit",
+    "python": "3.9.12",
+    "heartbeatAt": "2022-10-11T19:36:59.859676",
+    "startedAt": "2022-10-11T19:36:59.053201",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [
+        "inference",
+        "./test.csv"
+    ],
+    "state": "running",
+    "program": "/Users/securims/development/ml-prjctr/ml-prjctr/inference/cli.py",
+    "codePath": "inference/cli.py",
+    "git": {
+        "remote": "https://github.com/securims/ml-prjctr.git",
+        "commit": "a745bb6006acf6d3504fa2a321a8f28490727862"
+    },
+    "email": "anna.maria.parandiy@gmail.com",
+    "root": "/Users/securims/development/ml-prjctr/ml-prjctr",
+    "host": "MacBook-Pro.local",
+    "username": "securims",
+    "executable": "/Users/securims/opt/anaconda3/bin/python3"
+}

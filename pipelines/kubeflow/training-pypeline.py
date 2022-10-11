@@ -8,7 +8,8 @@ from kfp import dsl
 from kubernetes.client.models import V1EnvVar
 
 IMAGE = "ghcr.io/ml-in-prod/ml-test:latest"
-WANDB_PROJECT = os.getenv("WANDB_PROJECT")
+
+# WANDB_PROJECT = os.getenv("WANDB_PROJECT")
 WANDB_API_KEY = os.getenv("WANDB_API_KEY")
 
 
@@ -17,29 +18,30 @@ def training_pipeline():
     load_data = dsl.ContainerOp(
         name="load_data",
         command="python cli.py data ./test.csv".split(),
-        image=IMAGE
+        image=IMAGE,
+        file_outputs={"train": "/usr/src/app/train.csv", "val": "/usr/src/app/val.csv", "test": "/usr/src/app/test_val.csv"}
     )
 
     load_data.execution_options.caching_strategy.max_cache_staleness = "P0D"
 
-    # train_model = dsl.ContainerOp(
-    #     name="train_model ",
-    #     command="python cli.py train tests/data/test_config.json".split(),
-    #     image=IMAGE,
-    #     artifact_argument_paths=[
-    #         dsl.InputArgumentPath(load_data.outputs["train"], path="/tmp/data/train.csv"),
-    #         dsl.InputArgumentPath(load_data.outputs["val"], path="/tmp/data/val.csv"),
-    #         dsl.InputArgumentPath(load_data.outputs["test"], path="/tmp/data/test.csv"),
-    #     ],
-    #     file_outputs={
-    #         "config": "/tmp/results/config.json",
-    #         "model": "/tmp/results/pytorch_model.bin",
-    #         "tokenizer": "/tmp/results/tokenizer.json",
-    #         "tokenizer_config": "/tmp/results/tokenizer_config.json",
-    #         "special_tokens_map": "/tmp/results/special_tokens_map.json",
-    #         "model_card": "/tmp/results/README.md",
-    #     },
-    # )
+    train_model = dsl.ContainerOp(
+        name="train_model ",
+        command="python cli.py train ./test.csv".split(),
+        image=IMAGE,
+        artifact_argument_paths=[
+            dsl.InputArgumentPath(load_data.outputs["train"], path="/usr/src/app/train.csv"),
+            dsl.InputArgumentPath(load_data.outputs["val"], path="/usr/src/app/val.csv"),
+            dsl.InputArgumentPath(load_data.outputs["test"], path="/usr/src/app/test_val.csv"),
+        ],
+        # file_outputs={
+        #     "config": "/tmp/results/config.json",
+        #     "model": "/tmp/results/model.bin",
+        #     "tokenizer": "/tmp/results/tokenizer.json",
+        #     "tokenizer_config": "/tmp/results/tokenizer_config.json",
+        #     "special_tokens_map": "/tmp/results/special_tokens_map.json",
+        #     "model_card": "/tmp/results/README.md",
+        # },
+    )
 
     # upload_model = dsl.ContainerOp(
     #     name="upload_model",
@@ -57,12 +59,12 @@ def training_pipeline():
     #     ],
     # )
 
-    # env_var_project = V1EnvVar(name="WANDB_PROJECT", value=WANDB_PROJECT)
-    # upload_model = upload_model.add_env_variable(env_var_project)
+    #env_var_project = V1EnvVar(name="WANDB_PROJECT", value=WANDB_PROJECT)
+    #train_model = train_model.add_env_variable(env_var_project)
 
     # # TODO: should be a secret, but out of scope for this webinar
-    # env_var_password = V1EnvVar(name="WANDB_API_KEY", value=WANDB_API_KEY)
-    # upload_model = upload_model.add_env_variable(env_var_password)
+    env_var_password = V1EnvVar(name="WANDB_API_KEY", value=WANDB_API_KEY)
+    train_model = train_model.add_env_variable(env_var_password)
 
 
 def compile_pipeline() -> str:

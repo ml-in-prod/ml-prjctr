@@ -1,0 +1,74 @@
+[34m[1mwandb[39m[22m: [33mWARNING[39m The save_model argument by default saves the model in the HDF5 format that cannot save custom objects like subclassed models and custom layers. This behavior will be deprecated in a future release in favor of the SavedModel format. Meanwhile, the HDF5 model is saved as W&B files and the SavedModel as W&B Artifacts.
+WARNING:tensorflow:Issue encountered when serializing table_initializer.
+Type is unsupported, or the types of the items don't match field type in CollectionDef. Note this is a warning and probably safe to ignore.
+'NoneType' object has no attribute 'name'
+WARNING:tensorflow:From /Users/securims/opt/anaconda3/lib/python3.9/site-packages/tensorflow/python/profiler/internal/flops_registry.py:138: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+[34m[1mwandb[39m[22m: [32m[41mERROR[39m[49m Can't save model in the h5py format. The model will be saved as as an W&B Artifact in the 'tf' format.
+WARNING:absl:Found untraced functions such as _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op while saving (showing 4 of 4). These functions will not be directly callable after loading.
+[34m[1mwandb[39m[22m: Adding directory to artifact (/Users/securims/development/ml-prjctr/ml-prjctr/inference/wandb/run-20221011_222400-2dg4hdms/files/model-best)... Done. 0.1s
+Search: Running Trial #1
+Value             |Best Value So Far |Hyperparameter
+vanilla           |?                 |text_block_1/block_type
+5000              |?                 |text_block_1/max_tokens
+64                |?                 |text_block_1/text_to_int_sequence_1/output_sequence_length
+none              |?                 |text_block_1/embedding_1/pretraining
+128               |?                 |text_block_1/embedding_1/embedding_dim
+0.25              |?                 |text_block_1/embedding_1/dropout
+3                 |?                 |text_block_1/conv_block_1/kernel_size
+False             |?                 |text_block_1/conv_block_1/separable
+True              |?                 |text_block_1/conv_block_1/max_pooling
+2                 |?                 |text_block_1/conv_block_1/num_blocks
+2                 |?                 |text_block_1/conv_block_1/num_layers
+32                |?                 |text_block_1/conv_block_1/filters_0_0
+32                |?                 |text_block_1/conv_block_1/filters_0_1
+0                 |?                 |text_block_1/conv_block_1/dropout
+32                |?                 |text_block_1/conv_block_1/filters_1_0
+16                |?                 |text_block_1/conv_block_1/filters_1_1
+flatten           |?                 |text_block_1/spatial_reduction_1/reduction_type
+False             |?                 |text_block_1/dense_block_1/use_batchnorm
+2                 |?                 |text_block_1/dense_block_1/num_layers
+32                |?                 |text_block_1/dense_block_1/units_0
+0                 |?                 |text_block_1/dense_block_1/dropout
+32                |?                 |text_block_1/dense_block_1/units_1
+0                 |?                 |regression_head_1/dropout
+adam              |?                 |optimizer
+0.001             |?                 |learning_rate
+Epoch 1/5
+52/54 [===========================>..] - ETA: 0s - loss: 1.1792 - mean_squared_error: 1.1792
+[34m[1mwandb[39m[22m: [32m[41mERROR[39m[49m Can't save model in the h5py format. The model will be saved as as an W&B Artifact in the 'tf' format.
+WARNING:absl:Found untraced functions such as _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op while saving (showing 4 of 4). These functions will not be directly callable after loading.
+54/54 [==============================] - 5s 73ms/step - loss: 1.1751 - mean_squared_error: 1.1751 - val_loss: 0.8897 - val_mean_squared_error: 0.8897
+Epoch 2/5
+54/54 [==============================] - 3s 58ms/step - loss: 0.7116 - mean_squared_error: 0.7116 - val_loss: 0.7273 - val_mean_squared_error: 0.7273
+Epoch 3/5
+54/54 [==============================] - 1s 21ms/step - loss: 0.4391 - mean_squared_error: 0.4391 - val_loss: 0.8045 - val_mean_squared_error: 0.8045
+Epoch 4/5
+54/54 [==============================] - 1s 21ms/step - loss: 0.2548 - mean_squared_error: 0.2548 - val_loss: 1.1372 - val_mean_squared_error: 1.1372
+Epoch 5/5
+54/54 [==============================] - 1s 21ms/step - loss: 0.2603 - mean_squared_error: 0.2603 - val_loss: 0.8665 - val_mean_squared_error: 0.8665
+Trial 1 Complete [00h 00m 12s]
+val_loss: 0.7272899150848389
+Best val_loss So Far: 0.7272899150848389
+Total elapsed time: 00h 00m 12s
+Epoch 1/5
+67/67 [==============================] - 2s 19ms/step - loss: 1.1281 - mean_squared_error: 1.1281
+WARNING:tensorflow:Issue encountered when serializing table_initializer.
+Type is unsupported, or the types of the items don't match field type in CollectionDef. Note this is a warning and probably safe to ignore.
+'NoneType' object has no attribute 'name'
+WARNING:tensorflow:Issue encountered when serializing table_initializer.
+Type is unsupported, or the types of the items don't match field type in CollectionDef. Note this is a warning and probably safe to ignore.
+'NoneType' object has no attribute 'name'
+Epoch 2/5
+67/67 [==============================] - 1s 20ms/step - loss: 0.6123 - mean_squared_error: 0.6123
+Epoch 3/5
+67/67 [==============================] - 1s 19ms/step - loss: 0.3523 - mean_squared_error: 0.3523
+Epoch 4/5
+67/67 [==============================] - 1s 19ms/step - loss: 0.2548 - mean_squared_error: 0.2548
+Epoch 5/5
+
+67/67 [==============================] - 1s 20ms/step - loss: 0.3587 - mean_squared_error: 0.3587
+WARNING:absl:Found untraced functions such as _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op while saving (showing 4 of 4). These functions will not be directly callable after loading.
+WARNING:absl:Found untraced functions such as _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op while saving (showing 4 of 4). These functions will not be directly callable after loading.
+[34m[1mwandb[39m[22m: Adding directory to artifact (./model_autokeras)... Done. 0.0s
