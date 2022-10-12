@@ -1,7 +1,3 @@
-import sys
-sys.path.append('../inference')
-
-
 from pathlib import Path
 import pytest
 
@@ -13,7 +9,7 @@ import numpy as np
 
 @pytest.fixture()
 def test_file_path() -> str:
-    return "./test.csv"
+    return "./../test.csv"
 
 @pytest.fixture()
 def test_text() -> str:
@@ -34,20 +30,8 @@ def test_inference(test_file_path: str):
     train_model(x_train, y_train)
 
     path = str(Path().parent.resolve())
+
     model_path = Path(path + '/model_autokeras')
     
     res = run_inference(x_test, model_path)
     assert type(res) == np.ndarray
-
-
-# def test_inference_process_pool(test_file_path: str):
-#     x_train, y_train, x_test = get_data(test_file_path)
-    
-#     train_model(x_train, y_train)
-
-#     path = str(Path().parent.resolve())
-#     model_path = Path(path + '/model_autokeras')
-
-#     res = run_inference_process_pool(x_test, model_path)
-#     assert type(res) == np.ndarray
-

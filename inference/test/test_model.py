@@ -1,6 +1,3 @@
-import sys
-sys.path.append('../inference')
-
 from pathlib import Path
 import pytest
 
@@ -12,7 +9,7 @@ import numpy
 
 @pytest.fixture()
 def test_file_path() -> str:
-    return "./test.csv"
+    return "./../test.csv"
 
 @pytest.fixture()
 def test_text() -> str:
