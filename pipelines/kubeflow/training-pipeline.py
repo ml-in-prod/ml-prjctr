@@ -33,36 +33,8 @@ def training_pipeline():
             dsl.InputArgumentPath(load_data.outputs["val"], path="/usr/src/app/val.csv"),
             dsl.InputArgumentPath(load_data.outputs["test"], path="/usr/src/app/test_val.csv"),
         ],
-        # file_outputs={
-        #     "config": "/tmp/results/config.json",
-        #     "model": "/tmp/results/model.bin",
-        #     "tokenizer": "/tmp/results/tokenizer.json",
-        #     "tokenizer_config": "/tmp/results/tokenizer_config.json",
-        #     "special_tokens_map": "/tmp/results/special_tokens_map.json",
-        #     "model_card": "/tmp/results/README.md",
-        # },
     )
 
-    # upload_model = dsl.ContainerOp(
-    #     name="upload_model",
-    #     command="python nlp_sample/cli.py upload-to-registry kfp-pipeline /tmp/results".split(),
-    #     image=IMAGE,
-    #     artifact_argument_paths=[
-    #         dsl.InputArgumentPath(train_model.outputs["config"], path="/tmp/results/config.json"),
-    #         dsl.InputArgumentPath(train_model.outputs["model"], path="/tmp/results/pytorch_model.bin"),
-    #         dsl.InputArgumentPath(train_model.outputs["tokenizer"], path="/tmp/results/tokenizer.json"),
-    #         dsl.InputArgumentPath(train_model.outputs["tokenizer_config"], path="/tmp/results/tokenizer_config.json"),
-    #         dsl.InputArgumentPath(
-    #             train_model.outputs["special_tokens_map"], path="/tmp/results/special_tokens_map.json"
-    #         ),
-    #         dsl.InputArgumentPath(train_model.outputs["model_card"], path="/tmp/results/README.md"),
-    #     ],
-    # )
-
-    #env_var_project = V1EnvVar(name="WANDB_PROJECT", value=WANDB_PROJECT)
-    #train_model = train_model.add_env_variable(env_var_project)
-
-    # # TODO: should be a secret, but out of scope for this webinar
     env_var_password = V1EnvVar(name="WANDB_API_KEY", value=WANDB_API_KEY)
     train_model = train_model.add_env_variable(env_var_password)
 
