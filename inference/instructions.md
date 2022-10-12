@@ -1,6 +1,7 @@
 ## Inference 
 to run inference to test 1 and 8 workers
 `cd inference
+export PYTHONPATH=.
 python inference.py`
 
 results can be visible in `one-worker.png` and `8-workers.png`
