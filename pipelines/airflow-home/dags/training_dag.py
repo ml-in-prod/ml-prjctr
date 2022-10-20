@@ -7,11 +7,20 @@ from kubernetes.client import models as k8s
 volume = k8s.V1Volume(name="training-storage", persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(claim_name="training-storage"),)
 volume_mount = k8s.V1VolumeMount(name="training-storage", mount_path="/", sub_path=None)
 
-
 IMAGE = "ghcr.io/ml-in-prod/ml-test:latest"
 
 with DAG(start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=None, dag_id="training_dag") as dag:
-
+    clean_storage_before_start = KubernetesPodOperator(
+        name="clean_storage_before_start",
+        image=IMAGE,
+        cmds=["rm", "-rf", "/model-autokeras"],
+        task_id="clean_storage_before_start",
+        in_cluster=False,
+        namespace="default",
+        volumes=[volume],
+        volume_mounts=[volume_mount],
+    )
+    
     load_data = KubernetesPodOperator(
         name="load_data",
         image=IMAGE,
@@ -34,5 +43,17 @@ with DAG(start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=None,
         volumes=[volume],
         volume_mounts=[volume_mount],
     )
+
+    clean_up = KubernetesPodOperator(
+        name="clean_up",
+        image=IMAGE,
+        cmds=["rm", "-rf", "/model-autokeras"],
+        task_id="clean_up",
+        in_cluster=False,
+        namespace="default",
+        volumes=[volume],
+        volume_mounts=[volume_mount],
+        trigger_rule="all_done",
+    )
    
-    load_data >> train_and_upload_model
+    clean_storage_before_start >> load_data >> train_and_upload_model >> clean_up

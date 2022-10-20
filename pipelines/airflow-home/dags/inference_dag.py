@@ -14,6 +14,17 @@ volume_mount = k8s.V1VolumeMount(name="inference-storage", mount_path="/", sub_p
 IMAGE = "ghcr.io/ml-in-prod/ml-test:latest"
 
 with DAG(start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=None, dag_id="inference_dag") as dag:
+    clean_storage_before_start = KubernetesPodOperator(
+        name="clean_storage_before_start",
+        image=IMAGE,
+        cmds=["rm", "-rf", "/model-autokeras"],
+        task_id="clean_storage_before_start",
+        in_cluster=False,
+        namespace="default",
+        volumes=[volume],
+        volume_mounts=[volume_mount],
+    )
+    
     load_data = KubernetesPodOperator(
         name="load_data",
         image=IMAGE,
@@ -42,4 +53,16 @@ with DAG(start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=None,
         volume_mounts=[volume_mount],
     )
 
-    load_data >> run_inference
+    clean_up = KubernetesPodOperator(
+        name="clean_up",
+        image=IMAGE,
+        cmds=["rm", "-rf", "/model-autokeras"],
+        task_id="clean_up",
+        in_cluster=False,
+        namespace="default",
+        volumes=[volume],
+        volume_mounts=[volume_mount],
+        trigger_rule="all_done",
+    )
+
+    clean_storage_before_start >> load_data >> run_inference >> clean_up
