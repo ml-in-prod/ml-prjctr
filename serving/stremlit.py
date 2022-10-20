@@ -12,7 +12,7 @@ model = None
 
 
 if (model is None):
-    wandb.init(project="ml-in-prod")
+    wandb.init(PROJECT)
 
     artifact = wandb.use_artifact("securims/ml-in-prod/model_autokeras:latest", type="model")
     artifact_dir = artifact.download(root="model_autokeras")
