@@ -31,8 +31,8 @@ loaded_model = download_model(PROJECT)
 async def server():
     return "Server started"
 
-@app.post("/test/")
-async def create_item(item: Item):
+@app.post("/predict")
+async def predict(item: Item):
     prediction = loaded_model.predict([item.text])
 
     return json.dumps(prediction.tolist())
