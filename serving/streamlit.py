@@ -10,18 +10,24 @@ from wandb.keras import WandbCallback
 PROJECT = "ml-in-prod"
 model = None
 
-
-if (model is None):
+@st.cache(allow_output_mutation=True)
+def load_nlp_model():
     wandb.init(PROJECT)
 
     artifact = wandb.use_artifact("securims/ml-in-prod/model_autokeras:latest", type="model")
     artifact_dir = artifact.download(root="model_autokeras")
 
-model = load_model("model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
+    wandb.finish()
 
-text = st.text_input('Predict text score')
+    return load_model("model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
 
-st.write('Text ', text)
+def predict():
+    text = st.text_input('Predict text score')
 
-if len(text) > 0:
-    st.write('Prediction ', model.predict([text])[0][0])
+    st.write('Text ', text)
+
+    if len(text) > 0:
+        st.write('Prediction ', model.predict([text])[0][0])
+
+model = load_nlp_model()
+predict()
