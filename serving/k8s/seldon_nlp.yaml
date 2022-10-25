@@ -9,26 +9,29 @@ spec:
     seldon.io/grpc-timeout: "60"
   protocol: seldon
   predictors:
-  - componentSpecs:
-    - spec:
-        containers:
-        - image: ghcr.io/ml-in-prod/seldon-nlp:latest
-          name: classifier
-          env:
-          - name: GUNICORN_THREADS
-            value: '1'
-          - name: GUNICORN_WORKERS
-            value: '1'
-          - name: FLASK_SINGLE_THREADED
-            value: '1'
-          - name: SELDON_DEBUG
-            value: '1'          
-          - name: WANDB_API_KEY
-            value: c1bc1fb8ecae6285b816e39a36672e42d018725             
-          imagePullPolicy: Always
+    - componentSpecs:
+        - spec:
+            containers:
+              - image: ghcr.io/ml-in-prod/seldon-nlp:latest
+                name: classifier
+                ports:
+                  - containerPort: 8080
+                    name: http
+                env:
+                  - name: GUNICORN_THREADS
+                    value: "1"
+                  - name: GUNICORN_WORKERS
+                    value: "1"
+                  - name: FLASK_SINGLE_THREADED
+                    value: "1"
+                  - name: SELDON_DEBUG
+                    value: "1"
+                  - name: WANDB_API_KEY
+                    value: key
+                imagePullPolicy: Always
 
-    graph:
-      name: classifier
-      type: MODEL
-    name: model
-    replicas: 1
+      graph:
+        name: classifier
+        type: MODEL
+      name: model
+      replicas: 1

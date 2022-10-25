@@ -1,5 +1,7 @@
 FROM tensorflow/tensorflow:latest
 
+WORKDIR /app
+
 COPY NLP_Model.py .
 COPY requirements.txt .
 
