@@ -20,7 +20,8 @@ def download_model(PROJECT):
     artifact_dir = artifact.download(root="model_autokeras")
 
     model = load_model("model_autokeras", custom_objects=ak.CUSTOM_OBJECTS)
-
+    
+    wandb.finish()
     return model
 
 
@@ -28,11 +29,11 @@ app = FastAPI()
 loaded_model = download_model(PROJECT)
 
 @app.get("/")
-async def server():
+def server():
     return "Server started"
 
 @app.post("/predict")
-async def predict(item: Item):
+def predict(item: Item) -> json:
     prediction = loaded_model.predict([item.text])
 
     return json.dumps(prediction.tolist())
