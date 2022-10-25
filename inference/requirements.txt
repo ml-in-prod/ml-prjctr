@@ -5,3 +5,5 @@ tensorflow==2.9.0
 autokeras==1.0.20
 pytest==7.1.1
 great_expectations==0.15.15
+typer==0.6.1
+wandb==0.13.3
