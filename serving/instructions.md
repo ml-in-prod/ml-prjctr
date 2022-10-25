@@ -40,7 +40,7 @@ cd serving/k8s
 ### Create kind cluster 
 
 ```
-kind create cluster --name ml-in-production-course-week-5  --image=kindest/node:v1.21.2 --config=kind.yaml
+kind create cluster --name ml-in-production --image=kindest/node:v1.21.2 --config=kind.yaml
 ```
 
 ### Install with helm
