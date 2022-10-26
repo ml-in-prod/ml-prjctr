@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamlit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streamlit
+  template:
+    metadata:
+      labels:
+        app: streamlit
+    spec:
+      containers:
+        - name: streamlit
+          image: ghcr.io/ml-in-prod/streamlit-nlp:latest
+          env:
+            - name: WANDB_API_KEY
+              value: "wandb_api_key"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamlit
+  labels:
+    app: streamlit
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: streamlit
