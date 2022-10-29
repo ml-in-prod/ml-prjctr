@@ -34,8 +34,7 @@ streamlit.yaml
 ### Optimisation
 In benchmark folder you can find model.png and optimised.png files.
 
-optimised.png - profiling model trained in inference folder. Model weight 8.4mb and overall performance is a little bit worse(0.5e-07ms)
+optimised.png - profiling model trained in inference folder. Model weight 31.6mb and overall has better performance
 
-model.png - profiling model trained in benchmark folder. Model weight 31.4mb, have a little bit better prediction (2% difference)
-
+model.png - profiling model trained in benchmark folder. Model weight 8.4mb
 
