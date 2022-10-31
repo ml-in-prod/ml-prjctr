@@ -35,7 +35,7 @@ class NLP_Model(object):
     logger.info("predict called...")
     logger.info('converting tensor to image')
 
-    if self._model:
+    if self.model:
       logger.info("perform inference here...")
 
     logger.info("returning prediction...")
