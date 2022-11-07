@@ -17,6 +17,8 @@ import autokeras as ak
 import wandb
 from wandb.keras import WandbCallback
 
+model = "securims/ml-in-prod/model_autokeras:latest"
+
 def train_model(x_train: np.ndarray, y_train: np.ndarray) -> ak.TextRegressor:
 
     wandb.init(project="ml-in-prod")
@@ -89,7 +91,7 @@ def run_inference(x_test: np.ndarray, path:str = "model_autokeras", batch_size: 
        "batch_size": 128
     }
 
-    artifact = wandb.use_artifact("securims/ml-in-prod/model_autokeras:latest", type="model")
+    artifact = wandb.use_artifact(model, type="model")
     artifact_dir = artifact.download(root=path)
 
     model = load_model(path, custom_objects=ak.CUSTOM_OBJECTS)
