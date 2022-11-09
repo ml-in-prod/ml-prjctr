@@ -16,6 +16,12 @@ cd feast
 python train.py
 ```
 
+### Run inference
+```
+cd feast
+uvicorn inference:app --reload
+```
+
 
 
 
