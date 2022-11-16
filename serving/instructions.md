@@ -73,3 +73,23 @@ http://0.0.0.0:7777/seldon/default/iris-model/api/v1.0/doc/#/
 
 curl -X POST "http://0.0.0.0:7777/seldon/default/iris-model/api/v1.0/predictions" -H "accept: application/json" -H "Content-Type: application/json" -d "{\"data\":{\"ndarray\":[[1,2,3,4]]}}"
 ```
+
+### Monitoring
+
+```
+kubectl create namespace seldon-monitoring
+
+helm upgrade --install seldon-monitoring kube-prometheus \
+    --version 6.9.5 \
+    --set fullnameOverride=seldon-monitoring \
+    --namespace seldon-monitoring \
+    --repo https://charts.bitnami.com/bitnami
+
+kubectl rollout status -n seldon-monitoring statefulsets/prometheus-seldon-monitoring-prometheus
+```
+
+```
+cd k8s
+kubectl apply -f seldon-podmonitor.yaml
+kubectl port-forward -n seldon-monitoring svc/seldon-monitoring-prometheus 9090:9090
+```

@@ -1,0 +1,32 @@
+
+<
+
+__dummy"
+__dummy_idJfeast
+Òæª›À·ì¸Òæª›À·ì¸
+:
+
+driver"	driver_idJfeast
+Òæª›¾ï¸Òæª›¾ï¸1"$ab6ecfbd-1ddc-4bbc-bedb-851514d9f267*£ðª›Èëþ|2ð
+Ï
+driver_hourly_statsfeastdriver"
+	conv_rate"
+acc_rate"
+avg_daily_trips*
+teamdriver_performance2€£:Ãevent_timestamp*createdZTR/Users/securims/development/ml-prjctr/feast/feature_repo/data/driver_stats.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢driver_hourly_stats_source@b
+	driver_id
+Òæª›Øˆù¸Òæª›Øˆù¸2×
+¸
+driver_accuracy_statsfeastdriver"
+	conv_rate"
+acc_rate*
+teamdriver_stats2€£:Åevent_timestamp*createdZTR/Users/securims/development/ml-prjctr/feast/feature_repo/data/driver_stats.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢driver_accuracy_stats_source@b
+	driver_id
+£ðª›°šò|£ðª›°šò|R¼
+œ
+,feast.infra.online_stores.sqlite.SqliteTable"l
+M/Users/securims/development/ml-prjctr/feast/feature_repo/data/online_store.dbfeast_driver_accuracy_stats
+š
+,feast.infra.online_stores.sqlite.SqliteTable"j
+M/Users/securims/development/ml-prjctr/feast/feature_repo/data/online_store.dbfeast_driver_hourly_statsbËevent_timestamp*createdZTR/Users/securims/development/ml-prjctr/feast/feature_repo/data/driver_stats.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢driver_hourly_stats_sourceªfeastbÍevent_timestamp*createdZTR/Users/securims/development/ml-prjctr/feast/feature_repo/data/driver_stats.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢driver_accuracy_stats_sourceªfeastz-
+feast$2064d469-884a-40e6-b568-c814e1a7d764
